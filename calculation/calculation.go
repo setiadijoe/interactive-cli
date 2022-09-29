@@ -22,7 +22,7 @@ func MultiNumber(x, y float64) error {
 
 func DivNumber(x, y float64) error {
 	if y == 0.0 {
-		return errors.New("second number must not be zero")
+		return errors.New("[ERROR] Second number must not be zero")
 	}
 
 	log.Printf("Result of division = %.2f", x/y)
