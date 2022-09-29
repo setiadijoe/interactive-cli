@@ -50,78 +50,85 @@ func main() {
 		Validate:  validate,
 	}
 
-	_, result, err := selectPrompt.Run()
-	if err != nil {
-		fmt.Println("Prompt failed :", err)
-	}
-
-	fmt.Printf("\nYou choose %+v\n", result)
-
-	switch result {
-	case "Addition":
-		firstAtt, err := firstNumber.Run()
+	for {
+		_, result, err := selectPrompt.Run()
 		if err != nil {
-			fmt.Println(err)
+			fmt.Println("Prompt failed :", err)
+			continue
 		}
 
-		secondAtt, err := secondNumber.Run()
-		if err != nil {
-			fmt.Println(err)
+		fmt.Printf("\nYou choose %+v\n", result)
+
+		switch result {
+		case "Addition":
+			firstAtt, err := firstNumber.Run()
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			secondAtt, err := secondNumber.Run()
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			first := parsingFloat(firstAtt)
+			second := parsingFloat(secondAtt)
+
+			calculation.SumNumber(first, second)
+			continue
+		case "Substraction":
+			firstAtt, err := firstNumber.Run()
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			secondAtt, err := secondNumber.Run()
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			first := parsingFloat(firstAtt)
+			second := parsingFloat(secondAtt)
+
+			calculation.SubstracNumber(first, second)
+			continue
+		case "Multipiclation":
+			firstAtt, err := firstNumber.Run()
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			secondAtt, err := secondNumber.Run()
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			first := parsingFloat(firstAtt)
+			second := parsingFloat(secondAtt)
+
+			calculation.MultiNumber(first, second)
+			continue
+		case "Divition":
+			firstAtt, err := firstNumber.Run()
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			secondAtt, err := secondNumber.Run()
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			first := parsingFloat(firstAtt)
+			second := parsingFloat(secondAtt)
+
+			err = calculation.DivNumber(first, second)
+			log.Fatalln(err)
+			continue
+		case "EXIT":
+			renderImages()
+			os.Exit(0)
 		}
-
-		first := parsingFloat(firstAtt)
-		second := parsingFloat(secondAtt)
-
-		calculation.SumNumber(first, second)
-	case "Substraction":
-		firstAtt, err := firstNumber.Run()
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		secondAtt, err := secondNumber.Run()
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		first := parsingFloat(firstAtt)
-		second := parsingFloat(secondAtt)
-
-		calculation.SubstracNumber(first, second)
-	case "Multipiclation":
-		firstAtt, err := firstNumber.Run()
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		secondAtt, err := secondNumber.Run()
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		first := parsingFloat(firstAtt)
-		second := parsingFloat(secondAtt)
-
-		calculation.MultiNumber(first, second)
-	case "Divition":
-		firstAtt, err := firstNumber.Run()
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		secondAtt, err := secondNumber.Run()
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		first := parsingFloat(firstAtt)
-		second := parsingFloat(secondAtt)
-
-		err = calculation.DivNumber(first, second)
-		log.Fatalln(err)
-	case "EXIT":
-		renderImages()
-		os.Exit(0)
 	}
 }
 
