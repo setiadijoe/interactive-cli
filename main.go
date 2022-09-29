@@ -123,7 +123,9 @@ func main() {
 			second := parsingFloat(secondAtt)
 
 			err = calculation.DivNumber(first, second)
-			log.Fatalln(err)
+			if err != nil {
+				log.Println(err)
+			}
 			continue
 		case "EXIT":
 			renderImages()
