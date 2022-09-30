@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -10,9 +11,13 @@ import (
 	"strconv"
 
 	"github.com/manifoldco/promptui"
+	"github.com/sirupsen/logrus"
 
 	"go-cli/calculation"
 )
+
+var buf bytes.Buffer
+var logError = log.New(&buf, "ERROR : ", log.Lmsgprefix)
 
 func main() {
 	validate := func(input string) error {
@@ -53,7 +58,8 @@ func main() {
 	for {
 		_, result, err := selectPrompt.Run()
 		if err != nil {
-			fmt.Println("Prompt failed :", err)
+			logError.Print(err)
+			logrus.Error(&buf)
 			continue
 		}
 
@@ -63,12 +69,14 @@ func main() {
 		case "Addition":
 			firstAtt, err := firstNumber.Run()
 			if err != nil {
-				fmt.Println(err)
+				logError.Print(err)
+				logrus.Error(&buf)
 			}
 
 			secondAtt, err := secondNumber.Run()
 			if err != nil {
-				fmt.Println(err)
+				logError.Print(err)
+				logrus.Error(&buf)
 			}
 
 			first := parsingFloat(firstAtt)
@@ -79,12 +87,14 @@ func main() {
 		case "Substraction":
 			firstAtt, err := firstNumber.Run()
 			if err != nil {
-				fmt.Println(err)
+				logError.Print(err)
+				logrus.Error(&buf)
 			}
 
 			secondAtt, err := secondNumber.Run()
 			if err != nil {
-				fmt.Println(err)
+				logError.Print(err)
+				logrus.Error(&buf)
 			}
 
 			first := parsingFloat(firstAtt)
@@ -95,12 +105,14 @@ func main() {
 		case "Multipiclation":
 			firstAtt, err := firstNumber.Run()
 			if err != nil {
-				fmt.Println(err)
+				logError.Print(err)
+				logrus.Error(&buf)
 			}
 
 			secondAtt, err := secondNumber.Run()
 			if err != nil {
-				fmt.Println(err)
+				logError.Print(err)
+				logrus.Error(&buf)
 			}
 
 			first := parsingFloat(firstAtt)
@@ -111,12 +123,14 @@ func main() {
 		case "Divition":
 			firstAtt, err := firstNumber.Run()
 			if err != nil {
-				fmt.Println(err)
+				logError.Print(err)
+				logrus.Error(&buf)
 			}
 
 			secondAtt, err := secondNumber.Run()
 			if err != nil {
-				fmt.Println(err)
+				logError.Print(err)
+				logrus.Error(&buf)
 			}
 
 			first := parsingFloat(firstAtt)
@@ -124,7 +138,8 @@ func main() {
 
 			err = calculation.DivNumber(first, second)
 			if err != nil {
-				log.Println(err)
+				logError.Print(err)
+				logrus.Error(&buf)
 			}
 			continue
 		case "EXIT":

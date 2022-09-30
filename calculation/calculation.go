@@ -1,30 +1,40 @@
 package calculation
 
 import (
+	"bytes"
 	"errors"
 	"log"
+
+	"github.com/sirupsen/logrus"
 )
 
+var buf bytes.Buffer
+var logInfo = log.New(&buf, "RESULT : ", log.Lmsgprefix)
+
 func SumNumber(x, y float64) error {
-	log.Printf("Result of sum = %.2f", x+y)
+	logInfo.Printf("%.2f", x+y)
+	logrus.Info(&buf)
 	return nil
 }
 
 func SubstracNumber(x, y float64) error {
-	log.Printf("Result of substract = %.2f", x-y)
+	logInfo.Printf("%.2f", x-y)
+	logrus.Info(&buf)
 	return nil
 }
 
 func MultiNumber(x, y float64) error {
-	log.Printf("Result of multiplication = %.2f", x*y)
+	logInfo.Printf("%.2f", x*y)
+	logrus.Info(&buf)
 	return nil
 }
 
 func DivNumber(x, y float64) error {
 	if y == 0.0 {
-		return errors.New("[ERROR] Second number must not be zero")
+		return errors.New("Second number must not be zero")
 	}
 
-	log.Printf("Result of division = %.2f", x/y)
+	logInfo.Printf("%.2f", x/y)
+	logrus.Info(&buf)
 	return nil
 }

@@ -2,7 +2,10 @@ module go-cli
 
 go 1.18
 
-require github.com/manifoldco/promptui v0.9.0
+require (
+	github.com/manifoldco/promptui v0.9.0
+	github.com/sirupsen/logrus v1.9.0
+)
 
 require (
 	github.com/chzyer/readline v1.5.1 // indirect
