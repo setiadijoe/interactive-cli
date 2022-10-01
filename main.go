@@ -1,23 +1,20 @@
 package main
 
 import (
-	"bytes"
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 	"path/filepath"
 	"strconv"
 
 	"github.com/manifoldco/promptui"
-	"github.com/sirupsen/logrus"
 
 	"go-cli/calculation"
+	"go-cli/pkg/logger"
 )
 
-var buf bytes.Buffer
-var logError = log.New(&buf, "ERROR : ", log.Lmsgprefix)
+var log = logger.NewMyLog()
 
 func main() {
 	validate := func(input string) error {
@@ -55,11 +52,12 @@ func main() {
 		Validate:  validate,
 	}
 
+	calc := calculation.NewCalculate()
+
 	for {
 		_, result, err := selectPrompt.Run()
 		if err != nil {
-			logError.Print(err)
-			logrus.Error(&buf)
+			log.Error(err)
 			continue
 		}
 
@@ -69,77 +67,68 @@ func main() {
 		case "Addition":
 			firstAtt, err := firstNumber.Run()
 			if err != nil {
-				logError.Print(err)
-				logrus.Error(&buf)
+				log.Error(err)
 			}
 
 			secondAtt, err := secondNumber.Run()
 			if err != nil {
-				logError.Print(err)
-				logrus.Error(&buf)
+				log.Error(err)
 			}
 
 			first := parsingFloat(firstAtt)
 			second := parsingFloat(secondAtt)
 
-			calculation.SumNumber(first, second)
+			calc.SumNumber(first, second)
 			continue
 		case "Substraction":
 			firstAtt, err := firstNumber.Run()
 			if err != nil {
-				logError.Print(err)
-				logrus.Error(&buf)
+				log.Error(err)
 			}
 
 			secondAtt, err := secondNumber.Run()
 			if err != nil {
-				logError.Print(err)
-				logrus.Error(&buf)
+				log.Error(err)
 			}
 
 			first := parsingFloat(firstAtt)
 			second := parsingFloat(secondAtt)
 
-			calculation.SubstracNumber(first, second)
+			calc.SubstracNumber(first, second)
 			continue
 		case "Multipiclation":
 			firstAtt, err := firstNumber.Run()
 			if err != nil {
-				logError.Print(err)
-				logrus.Error(&buf)
+				log.Error(err)
 			}
 
 			secondAtt, err := secondNumber.Run()
 			if err != nil {
-				logError.Print(err)
-				logrus.Error(&buf)
+				log.Error(err)
 			}
 
 			first := parsingFloat(firstAtt)
 			second := parsingFloat(secondAtt)
 
-			calculation.MultiNumber(first, second)
+			calc.MultiNumber(first, second)
 			continue
 		case "Divition":
 			firstAtt, err := firstNumber.Run()
 			if err != nil {
-				logError.Print(err)
-				logrus.Error(&buf)
+				log.Error()
 			}
 
 			secondAtt, err := secondNumber.Run()
 			if err != nil {
-				logError.Print(err)
-				logrus.Error(&buf)
+				log.Error()
 			}
 
 			first := parsingFloat(firstAtt)
 			second := parsingFloat(secondAtt)
 
-			err = calculation.DivNumber(first, second)
+			err = calc.DivNumber(first, second)
 			if err != nil {
-				logError.Print(err)
-				logrus.Error(&buf)
+				log.Error(err)
 			}
 			continue
 		case "EXIT":

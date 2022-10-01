@@ -1,40 +1,40 @@
 package calculation
 
 import (
-	"bytes"
 	"errors"
-	"log"
-
-	"github.com/sirupsen/logrus"
+	"go-cli/pkg/logger"
 )
 
-var buf bytes.Buffer
-var logInfo = log.New(&buf, "RESULT : ", log.Lmsgprefix)
+type Calculate struct {
+	log *logger.MyLog
+}
 
-func SumNumber(x, y float64) error {
-	logInfo.Printf("%.2f", x+y)
-	logrus.Info(&buf)
+func NewCalculate() *Calculate {
+	return &Calculate{
+		log: logger.NewMyLog(),
+	}
+}
+
+func (c *Calculate) SumNumber(x, y float64) error {
+	c.log.InfoF("%.2f", x+y)
 	return nil
 }
 
-func SubstracNumber(x, y float64) error {
-	logInfo.Printf("%.2f", x-y)
-	logrus.Info(&buf)
+func (c *Calculate) SubstracNumber(x, y float64) error {
+	c.log.InfoF("%.2f", x-y)
 	return nil
 }
 
-func MultiNumber(x, y float64) error {
-	logInfo.Printf("%.2f", x*y)
-	logrus.Info(&buf)
+func (c *Calculate) MultiNumber(x, y float64) error {
+	c.log.InfoF("%.2f", x*y)
 	return nil
 }
 
-func DivNumber(x, y float64) error {
+func (c *Calculate) DivNumber(x, y float64) error {
 	if y == 0.0 {
 		return errors.New("Second number must not be zero")
 	}
 
-	logInfo.Printf("%.2f", x/y)
-	logrus.Info(&buf)
+	c.log.InfoF("%.2f", x/y)
 	return nil
 }
