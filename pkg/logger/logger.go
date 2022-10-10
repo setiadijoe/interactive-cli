@@ -7,22 +7,20 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-type LogType string
-
 var (
 	buf      bytes.Buffer
 	LogInfo  = log.New(&buf, "RESULT : ", log.Lmsgprefix)
 	LogError = log.New(&buf, "ERROR : ", log.Lmsgprefix)
-	LogTypes = []LogType{"INFO", "ERROR"}
 )
 
 type MyLog struct {
-	Type LogType
 }
 
 func NewMyLog() *MyLog {
 	return &MyLog{}
 }
+
+var mlog *MyLog
 
 func (m *MyLog) Info(args ...interface{}) {
 	LogInfo.Print(args...)

@@ -14,8 +14,6 @@ import (
 	"go-cli/pkg/logger"
 )
 
-var log = logger.NewMyLog()
-
 func main() {
 	validate := func(input string) error {
 		_, err := strconv.ParseFloat(input, 64)
@@ -57,7 +55,7 @@ func main() {
 	for {
 		_, result, err := selectPrompt.Run()
 		if err != nil {
-			log.Error(err)
+			logger.Error(err)
 			continue
 		}
 
@@ -67,12 +65,12 @@ func main() {
 		case "Addition":
 			firstAtt, err := firstNumber.Run()
 			if err != nil {
-				log.Error(err)
+				logger.Error(err)
 			}
 
 			secondAtt, err := secondNumber.Run()
 			if err != nil {
-				log.Error(err)
+				logger.Error(err)
 			}
 
 			first := parsingFloat(firstAtt)
@@ -83,12 +81,12 @@ func main() {
 		case "Substraction":
 			firstAtt, err := firstNumber.Run()
 			if err != nil {
-				log.Error(err)
+				logger.Error(err)
 			}
 
 			secondAtt, err := secondNumber.Run()
 			if err != nil {
-				log.Error(err)
+				logger.Error(err)
 			}
 
 			first := parsingFloat(firstAtt)
@@ -99,12 +97,12 @@ func main() {
 		case "Multipiclation":
 			firstAtt, err := firstNumber.Run()
 			if err != nil {
-				log.Error(err)
+				logger.Error(err)
 			}
 
 			secondAtt, err := secondNumber.Run()
 			if err != nil {
-				log.Error(err)
+				logger.Error(err)
 			}
 
 			first := parsingFloat(firstAtt)
@@ -115,12 +113,12 @@ func main() {
 		case "Divition":
 			firstAtt, err := firstNumber.Run()
 			if err != nil {
-				log.Error()
+				logger.Error()
 			}
 
 			secondAtt, err := secondNumber.Run()
 			if err != nil {
-				log.Error()
+				logger.Error()
 			}
 
 			first := parsingFloat(firstAtt)
@@ -128,7 +126,7 @@ func main() {
 
 			err = calc.DivNumber(first, second)
 			if err != nil {
-				log.Error(err)
+				logger.Error(err)
 			}
 			continue
 		case "EXIT":
