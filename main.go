@@ -21,9 +21,9 @@ func main() {
 			"Addition", "Substraction", "Multipiclation", "Divition", "Generate UUID", "EXIT",
 		},
 	}
+	renderImages("intro.txt")
 
 	for {
-		renderImages("intro.txt")
 		_, result, err := selectPrompt.Run()
 		if err != nil {
 			logger.Error(err)
