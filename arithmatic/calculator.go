@@ -1,4 +1,4 @@
-package calculation
+package arithmatic
 
 import (
 	"errors"
@@ -38,7 +38,7 @@ var (
 		Validate:  validate,
 	}
 
-	calc = NewCalculate()
+	calc = NewArithmatic()
 )
 
 func Addition() {
@@ -75,7 +75,7 @@ func Substraction() {
 	calc.SubstracNumber(first, second)
 }
 
-func Multipiclation() {
+func Multiplication() {
 	firstAtt, err := firstNumber.Run()
 	if err != nil {
 		logger.Error(err)

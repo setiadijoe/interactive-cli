@@ -8,7 +8,7 @@ import (
 
 	"github.com/manifoldco/promptui"
 
-	"go-cli/calculation"
+	art "go-cli/arithmatic"
 	generatoruuid "go-cli/generator-uuid"
 	"go-cli/pkg/logger"
 )
@@ -18,7 +18,7 @@ func main() {
 	selectPrompt := promptui.Select{
 		Label: "Number Calculation",
 		Items: []string{
-			"Addition", "Substraction", "Multipiclation", "Divition", "Generate UUID", "EXIT",
+			"Addition", "Substraction", "Multiplication", "Divition", "Generate UUID", "EXIT",
 		},
 	}
 	renderImages("intro.txt")
@@ -34,16 +34,16 @@ func main() {
 
 		switch result {
 		case "Addition":
-			calculation.Addition()
+			art.Addition()
 			continue
 		case "Substraction":
-			calculation.Substraction()
+			art.Substraction()
 			continue
-		case "Multipiclation":
-			calculation.Multipiclation()
+		case "Multiplication":
+			art.Multiplication()
 			continue
 		case "Divition":
-			calculation.Divition()
+			art.Divition()
 			continue
 		case "Generate UUID":
 			generatoruuid.GenerateUUIDV4()
